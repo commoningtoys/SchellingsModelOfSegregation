@@ -14,7 +14,7 @@ For example let's assume a model with two possible genders that we represent wit
 | **5** | 1 | 1 | 1 | 1 | 0 |
 
 
-We consider a neighbourhood as a 7x7 grid. We assume that every agent has a threshold of 30%. Every agent checks for his neighbours, if more than 30% of them are different than him, than he will move to one of the free spots marked with a #.
+We consider a neighbourhood as a 5x5 grid. We assume that every agent has a threshold of 30%. Every agent checks for his neighbours, if more than 30% of them are different than him, than he will move to one of the free spots marked with a #.
 
 Here I reproduce the grid and I mark the agent that will move like [this]()
 
