@@ -33,6 +33,7 @@ In the [WEB APP](https://commoningtoys.github.io/SchellingsModelOfSegregation/) 
 * Size of the grid
 * Number of different features
 * The amount of empty spots
+
 By changing the values of those three factors it is possible to visualize how the agents segragate.
 
 
