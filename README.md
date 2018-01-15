@@ -5,17 +5,27 @@ The Schelling's model of segregation analyzes the dynamics occuring inside neigh
 
 For example let's assume a model with two possible genders that we represent with 1 and 0
 
-| 1 | 1 | 0  | 0 | 1 | 0 | * | 0 |
-| :---: |:---:| :---:| :---: | :---: | :---: | :---: | :---: |
-| **1** | **0** | **0** | 0 | * | 1 | 0 | * |
-| **1** | **1** | **0** | 1 | 0 | 0 | 1 | 0 |
-| 0 | 0 | 1 | 0 | 1 | 0 | 0 | 1 |
-| 1 | 0 | 1 | 1 | * | 0 | 1 | 0 |
-| * | 1 | 1 | 1 | 1 | 0 | * | 1 |
-| 0  | * | 0 | * | 1 | 0 | 0 |  1|
-| 0 | * | * | 0 | 0 | 0 | 1 | 0 |
+| \ | 1 |  2  | 3 | 4 | 5 |
+| :---: |:---:| :---:| :---: | :---: | :---: |
+| **1** | 0 | 0 | 0 | # | 1 |
+| **2** | 1 | 0 | 1 | 0 | 0 |
+| **3** | 0 | 1 | 0 | 1 | 0 |
+| **4** | 0 | 1 | 1 | # | 0 |
+| **5** | 1 | 1 | 1 | 1 | 0 |
 
-we consider a neighbourhood as a 8x8 grid. The agent in the middle checks his neighbours. 3 out of 8 have gis same gender the others have a different gender. If the agent has a threshold of 30% he will stay if it's higher >40% he will move somewhere else.
+
+We consider a neighbourhood as a 7x7 grid. We assume that every agent has a threshold of 30%. Every agent checks for his neighbours, if more than 30% of them are different than him, than he will move to one of the free spots marked with a #.
+
+Here I reproduce the grid and I mark the agent that will move like [this]()
+
+| \ | 1 |  2  | 3 | 4 | 5 |
+| :---: |:---:| :---:| :---: | :---: | :---: |
+| **1** | [0]() | [0]() | 0 | # | [1]() |
+| **2** | [1]() | 0 | 1 | 0 | 0     |
+| **3** | [0]() | [1]() | [0]() | [1]() | 0 |
+| **4** | [0]() | [1]() | 1 | # | [0]()|
+| **5** | [1]() | 1 | 1 | [1]() | [0]() |
+|
 
 
 ![img](https://user-images.githubusercontent.com/17408277/31388131-4de53844-adcd-11e7-8d40-bd9f60be120a.png)
