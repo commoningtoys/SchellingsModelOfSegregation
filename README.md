@@ -25,7 +25,7 @@ Here I reproduce the grid and I mark the agent that will move like [this]()
 | **3** | [0]() | [1]() | [0]() | [1]() | 0 |
 | **4** | [0]() | [1]() | 1 | # | [0]()|
 | **5** | [1]() | 1 | 1 | [1]() | [0]() |
-|
 
+All the agents marked in blue will ove to one of the empty spots. This process goes on and on until an equilibrium is reached. In this case if you reproduce the same setting on the [WEB APP](https://commoningtoys.github.io/SchellingsModelOfSegregation/) it will end up with one agent costantly moving without finding the right spot where he can settle.
 
 ![img](https://user-images.githubusercontent.com/17408277/31388131-4de53844-adcd-11e7-8d40-bd9f60be120a.png)
