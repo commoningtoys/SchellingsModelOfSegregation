@@ -105,11 +105,12 @@ class SchellingsModel{
 					//here we check if the amount of unwanted neighbours surpasses the threshold
 					if(totalNeighbour -1 > 0){
 						let percSameType = ((totalSameType - 1) / (totalNeighbour -1)) * 100;//we do minus 1 because the loop checks also the agent itself
+						//here you add the range with &&
 						if(percSameType <= this.agents[x][y].t)this.agents[x][y].sat = 0;//reduce the agent satisfaction accoding to the percentage of same neighbours
 							else this.agents[x][y].sat = 1;
 						if(this.agents[x][y].tu != null && percSameType >= this.agents[x][y].tu)this.agents[x][y].sat = 0;
 						//it could also be possible to decrease the satisfaction to 0 instead of changing it directly
-					} else this.agents[x][y].sat = 1;// if there is no one aroud the agent is satisfied
+					} else this.agents[x][y].sat = 1;// if there is no one around the agent is satisfied
 					//reset the counters
 					totalNeighbour = 0;
 					totalSameType = 0;
