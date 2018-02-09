@@ -10,18 +10,18 @@ function setup(){
 	background(255);
 	// initialize the sound library
 	frameRate(10);
-	osc = new p5.Oscillator();
-	osc.setType('triangle');
-	osc2 = new p5.Oscillator();
-	osc2.setType('sawtooth');
-	env = new p5.Env();
-	osc.start();
-	// osc2.start();
-	env.setADSR(0.001, 0.5, 0.1, 0.5);
-	env.setRange(1, 0);
+	// osc = new p5.Oscillator();
+	// osc.setType('triangle');
+	// osc2 = new p5.Oscillator();
+	// osc2.setType('sawtooth');
+	// env = new p5.Env();
+	// osc.start();
+	// // osc2.start();
+	// env.setADSR(0.001, 0.5, 0.1, 0.5);
+	// env.setRange(1, 0);
 	// initModel();
 	// volume0();
-	SM = new SchellingsModel(30, 50, 10, 6, 30, false);
+	SM = new SchellingsModel(10, 10, 2, 20, 70);
 }
 
 function draw(){	
@@ -39,7 +39,7 @@ function initModel(){
 	let input2 = document.getElementById("size").value;
 	let input3 = document.getElementById("threshold").value;
 	let input4 = document.getElementById("freeCell").value;
-	SM = new SchellingsModel(parseInt(input2), 50, parseInt(input4), parseInt(input1), parseInt(input3), randomizedThresholds);
+	SM = new SchellingsModel(parseInt(input2), parseInt(input4), parseInt(input1), parseInt(input3), randomizedThresholds);
 }
 
 function updateValue(){

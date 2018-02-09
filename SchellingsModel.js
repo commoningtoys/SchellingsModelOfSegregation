@@ -9,7 +9,7 @@ class SchellingsModel{
 	* @param {boolean} randomizedThreshold - if true the schelling's model starts with randomized thresholds
 	  that change according to how much the agent had to move.
 	*/
-	constructor(size, percentage, freeCells, agentKind, threshold, randomizedThreshold){
+	constructor(size, freeCells, agentKind, threshold1, threshold2, randomizedThreshold){
 		this.cols = this.rows = size + 1;
 		this.r = floor(gridSize / size + 1);
 		this.AK = agentKind;
@@ -23,7 +23,7 @@ class SchellingsModel{
 		for (let y = 1; y < this.rows - 1; y++){
 			for (let x = 1; x < this.cols - 1; x++){
 					if(floor(random(100)) > freeCells){
-						this.agents[x][y] = new Agent(floor(random(agentKind)), randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold);
+						this.agents[x][y] = new Agent(floor(random(agentKind)), threshold1, threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
 						this.agentCount++;
 					}
 			}
@@ -72,7 +72,7 @@ class SchellingsModel{
 			agents[newX][newY].sat = 1;//reset satisfaction of the agent to 1
 			//we play a note according to the distance the agent had to move
 			d = dist(x, y, newX, newY);
-			playSound(d, floor(gridSize / size + 1));//improve this using this.r or similar
+			// playSound(d, floor(gridSize / size + 1));//improve this using this.r or similar
 			freeSpots = emptySpots(agents);//update the empty position array
 			// console.log(minD, newX, newY);
 		}
@@ -91,7 +91,7 @@ class SchellingsModel{
 
 	checkNeighbour(){
 		let totalNeighbour = 0;
-		let totalSameType = 0;
+		let totalOtherType = 0;
 		for (let y = 1; y < this.rows - 1; y++){
 			for (let x = 1; x < this.cols - 1; x++){
 				if(this.agents[x][y] != null){//always ignore the null spot
@@ -99,21 +99,21 @@ class SchellingsModel{
 					for(let i = -1; i <= 1; i++){
 						for(let j = -1; j <= 1; j++){
 							if(this.agents[x + j][y + i] != null)totalNeighbour++;//here we check the number of neighbours
-							if(this.agents[x + j][y + i] != null && this.agents[x + j][y + i].type == this.agents[x][y].type)totalSameType++;
+							if(this.agents[x + j][y + i] != null && this.agents[x + j][y + i].type != this.agents[x][y].type)totalOtherType++;
 						}
 					}
 					//here we check if the amount of unwanted neighbours surpasses the threshold
 					if(totalNeighbour -1 > 0){
-						let percSameType = ((totalSameType - 1) / (totalNeighbour -1)) * 100;//we do minus 1 because the loop checks also the agent itself
+						let percOtherType = ((totalOtherType - 1) / (totalNeighbour -1)) * 100;//we do minus 1 because the loop checks also the agent itself
 						//here you add the range with &&
-						if(percSameType <= this.agents[x][y].t)this.agents[x][y].sat = 0;//reduce the agent satisfaction accoding to the percentage of same neighbours
-							else this.agents[x][y].sat = 1;
-						if(this.agents[x][y].tu != null && percSameType >= this.agents[x][y].tu)this.agents[x][y].sat = 0;
+						if(percOtherType <= this.agents[x][y].t1 || percOtherType >= this.agents[x][y].t2)this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
+							else this.agents[x][y].sat = 0;
+						// if(this.agents[x][y].tu != null && percSameType >= this.agents[x][y].tu)this.agents[x][y].sat = 0;
 						//it could also be possible to decrease the satisfaction to 0 instead of changing it directly
 					} else this.agents[x][y].sat = 1;// if there is no one around the agent is satisfied
 					//reset the counters
 					totalNeighbour = 0;
-					totalSameType = 0;
+					totalOtherType = 0;
 				//////////////////////////	end of this.agents[x][y] !=null if
 				}
 			}
