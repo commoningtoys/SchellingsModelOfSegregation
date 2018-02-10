@@ -22,7 +22,7 @@ function setup(){
 	// initModel();
 	// volume0();
 	// constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold)
-	SM = new SchellingsModel(2, 10, 10, 30, 10, false);
+	SM = new SchellingsModel(2, 30, 10, 30, 10, false);
 }
 
 function draw(){	
@@ -59,7 +59,7 @@ function updateValue(){
 	document.getElementById("theSize").innerHTML = "size: " + document.getElementById("size").value;
 	document.getElementById("theKind").innerHTML = "kind: " + document.getElementById("kind").value;
 	if(!randomizedThresholds)document.getElementById("theThreshold").innerHTML = thresholdText();
-	document.getElementById("theFreeCell").innerHTML = "freeCell: " + document.getElementById("freeCell").value + " %";
+	document.getElementById("theFreeCell").innerHTML = "free cells: " + document.getElementById("freeCell").value + "%";
 }
 
 function randomThreshold(){
