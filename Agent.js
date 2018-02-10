@@ -1,4 +1,5 @@
 // let agentColors = [];
+let blue, red;
 class Agent{
 	/**
 	* constructor for the agent class
@@ -17,6 +18,9 @@ class Agent{
 		this.agentColors = [color(255, 0, 0, this.alpha), color(0, 255, 0, this.alpha), color(0, 0, 255, this.alpha), 
 				   color(255, 255, 0, this.alpha), color(0, 255, 255, this.alpha), color(255, 0, 255, this.alpha),
 				   color(0, this.alpha), color(255, this.alpha)];
+		
+	blue = color(0, 0, 255);
+	red = color(255, 0, 0);
 	}
 	/**
 	* constructor for the agent class
@@ -25,7 +29,7 @@ class Agent{
 	* @param {int} r - radius of polygon
 	*/
 	show(x, y, r){
-		strokeWeight(2);
+		strokeWeight(3);
 		stroke(0);
 		noFill();
 		fill(0, this.alpha);
@@ -37,5 +41,8 @@ class Agent{
 			vertex(posX, posY);
 		}
 		endShape(CLOSE);
+		// fill(red);
+		// text(this.sat, x, y)
+
 	}
 }

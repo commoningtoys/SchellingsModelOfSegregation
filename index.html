@@ -1,134 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8"> 
+	<meta charset="utf-8">
 	<script src="p5.min.js"></script>
 	<script src="addons/p5.dom.min.js"></script>
 	<script src="addons/p5.sound.min.js"></script>
 	<script src="sketch.js"></script>
-	<script src="Agent.js"></script>	
+	<script src="Agent.js"></script>
 	<script src="SchellingsModel.js"></script>
-	<style>
-	/*class description*/
-	.happiness{
-		position: absolute;
-		left: 5px;
-		top: 355px;
-		background: #fff;
-		color: #000;
-		font-family: Helvetica;
-		font-weight: bolder;
-		font-size: 45px;
-		border: solid 3px #000;
-		z-index: 1;
-		padding: 5px 5px 3px 5px;
-	}
-	.inputRange{
-		position: absolute;
-		left: 185px;
-		background: #fff;
-		color: #000;
-		font-family: Helvetica;
-		font-weight: bolder;
-		font-size: 20px;
-		border: solid 3px #000;
-		cursor: ne-resize;
-		z-index: 1;
-		padding: 5px;
-	}
-	.inputValue{
-		position: absolute;
-		left: 185px;
-		top: 105px;
-		background: #fff;
-		color: #000;
-		font-family: Helvetica;
-		font-weight: bolder;
-		font-size: 15px;
-		border: solid 3px #000;
-		cursor: ne-resize;
-		z-index: 1;
-		padding: 5px 5px 3px 5px;
-	}
-	body{
-		margin: 0;
-	}
-	/*styling the select element*/
-	select {
-		font-family: Helvetica;
-		font-weight: bolder;
-		font-size: 20px;
-		padding-top: 3px;
-		padding-right: 3px;
-	}
-	select:hover{
-		color: #000;
-		background-color: #fff;
-	}
-	select:not([multiple]){
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		border: solid 3px #000; 
-	}
-	/*styling the single entries of the list*/
-	option{
-		border: solid 1px #000;
-		font-size: 15px;
-		padding-top: 3px;
-	}
-	option:hover{
-		letter-spacing: 5px;
-	}
-	input{	
-		top: 105px;
-		left: 5px;	
-		background: #fff;
-		position: absolute;
-		width: 150px;
-		border: solid 3px #000;
-		height: 20px;
-		float: left;
-	}
-	/*styling buttons*/
-	button{
-		position: absolute;
-		left: 5px;
-		background-color: #fff;
-		border: solid 3px #000;
-		font-family: Helvetica;
-		font-weight: bolder;
-		font-size: 20px;
-		padding-top: 3px;
-	}
-	button:hover{
-		border: solid 3px #0f0;
-	}
-	blockquote{
-		font-style: italic;
-		font-size: 13px;
-	}
-	a{
-		color: #f00;
-		border-bottom: none;
-	}
-	a:hover{
-		letter-spacing: 3px;
-	}
-</style>
+	<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body bgcolor="#FFF">
+
+	<div id="slider-range"></div>
 	<div>
 		<input type="range" style="top: 5px" id="kind" value="2" min="2" max="6" step="1" onchange="updateValue()">
-		<input type="range" style="top: 55px" id="size" value="30" min="5" max="30" step="1" onchange="updateValue()">
-		<input type="range" style="top: 105px" id="threshold" value="30" min="5" max="95" step="1" onchange="updateValue()">
+		<input type="range" style="top: 55px" id="size" value="10" min="5" max="30" step="1" onchange="updateValue()">
+		<input type="range" style="top: 95px" id="threshold1" value="10" min="0" max="50" step="1" onchange="updateValue()">
+		<input type="range" style="top: 120px" id="threshold2" value="30" min="1" max="95" step="1" onchange="updateValue()">
 		<input type="range" style="top: 155px" id="freeCell" value="10" min="5" max="90" step="5" onchange="updateValue()">
 		<button type="button" style="top: 205px;" id="initModel" onclick="initModel()">PLAY</button>
 		<button type="button" style="top: 255px; font-size: 15px" id="randomThreshold" onclick="randomThreshold()">RANDOMIZE THE THERSHOLDS</button>
 	</div>
 	<div class="inputValue" style="top: 5px" id="theKind">kind: 2</div>
 	<div class="inputValue" style="top: 55px" id="theSize">size: 30</div>
-	<div class="inputValue" style="top: 105px" id="theThreshold">threshold: 30</div>
+	<div class="inputValue" style="top: 105px" id="theThreshold">10% &lt threshold &gt 30%</div>
 	<div class="inputValue" style="top: 155px" id="theFreeCell">free cell: 10</div>
 	<div class="happiness" style="top: 305px" id="happinessValue">:-(</div>
 </body>
+
 </html>

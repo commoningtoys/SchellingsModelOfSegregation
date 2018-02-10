@@ -21,7 +21,8 @@ function setup(){
 	// env.setRange(1, 0);
 	// initModel();
 	// volume0();
-	SM = new SchellingsModel(10, 10, 2, 20, 70);
+	// constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold)
+	SM = new SchellingsModel(2, 10, 10, 30, 10, false);
 }
 
 function draw(){	
@@ -32,27 +33,43 @@ function draw(){
 			SM.displySatisfaction();				
 			SM.show();
 		}
+	let t1 = document.getElementById("threshold1");
+	let t2 = document.getElementById("threshold2");
+	if(parseInt(t1.value) >= parseInt(t2.value)){
+		t2.value = parseInt(t1.value) + 1;
+		document.getElementById("theThreshold").innerHTML = thresholdText();
+	}
+	// if(parseInt(t2.value) <= parseInt(t1.value)){
+	// 	console.log([parseInt(t2.value), parseInt(t1.value)])
+	// 	t1.value = parseInt(t2.value) + 1;
+	// 	document.getElementById("theThreshold").innerHTML = document.getElementById("threshold1").value + " % threshold: " + document.getElementById("threshold2").value + " %";
+	// }
 }
 
 function initModel(){
 	let input1 = document.getElementById("kind").value;
 	let input2 = document.getElementById("size").value;
-	let input3 = document.getElementById("threshold").value;
-	let input4 = document.getElementById("freeCell").value;
-	SM = new SchellingsModel(parseInt(input2), parseInt(input4), parseInt(input1), parseInt(input3), randomizedThresholds);
+	let input3 = document.getElementById("threshold1").value;
+	let input4 = document.getElementById("threshold2").value;
+	let input5 = document.getElementById("freeCell").value;
+	SM = new SchellingsModel(parseInt(input1), parseInt(input2), parseInt(input3), parseInt(input4), parseInt(input5),randomizedThresholds);
 }
 
 function updateValue(){
 	document.getElementById("theSize").innerHTML = "size: " + document.getElementById("size").value;
 	document.getElementById("theKind").innerHTML = "kind: " + document.getElementById("kind").value;
-	if(!randomizedThresholds)document.getElementById("theThreshold").innerHTML = "threshold: " + document.getElementById("threshold").value + " %";
+	if(!randomizedThresholds)document.getElementById("theThreshold").innerHTML = thresholdText();
 	document.getElementById("theFreeCell").innerHTML = "freeCell: " + document.getElementById("freeCell").value + " %";
 }
 
 function randomThreshold(){
 	randomizedThresholds = !randomizedThresholds;
 	document.getElementById("randomThreshold").innerHTML = randomizedThresholds == true ? "SET BACK TO DEFAULT" : "RANDOMIZE THE THERSHOLDS";
-	document.getElementById("theThreshold").innerHTML = randomizedThresholds == true ? "RANDOMIZED!" : "threshold: " + document.getElementById("threshold").value + " %";
+	document.getElementById("theThreshold").innerHTML = randomizedThresholds == true ? "RANDOMIZED!" : thresholdText();
+	initModel();
+}
+function thresholdText(){
+	return document.getElementById("threshold1").value + "% &lt threshold &lt" + document.getElementById("threshold2").value + "%";
 }
 /**
 AUDIO STUFF

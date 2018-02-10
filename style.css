@@ -1,0 +1,111 @@
+
+
+    .inputRange,
+    .inputValue,
+    .happiness {
+        position: absolute;
+        left: 185px;
+        background: #fff;
+        color: #000;
+        font-family: Helvetica;
+        font-weight: bolder;
+        font-size: 20px;
+        border: solid 3px #000;
+        cursor: ne-resize;
+        z-index: 1;
+        padding: 5px;
+    }
+    .happiness {
+        left: 5px;
+        top: 355px;
+        font-size: 45px;
+        padding: 5px 5px 3px 5px;
+    }
+    .inputValue {
+        top: 105px;
+        font-size: 15px;
+        z-index: 1;
+        padding: 5px 5px 3px 5px;
+    }
+    .doubleSlider{
+        position: fixed;
+        width: 200px;
+    }
+    body {
+        margin: 0;
+    }
+
+    /*styling the select element*/
+
+    select {
+        font-family: Helvetica;
+        font-weight: bolder;
+        font-size: 20px;
+        padding-top: 3px;
+        padding-right: 3px;
+    }
+
+    select:hover {
+        color: #000;
+        background-color: #fff;
+    }
+
+    select:not([multiple]) {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: solid 3px #000;
+    }
+
+    /*styling the single entries of the list*/
+
+    option {
+        border: solid 1px #000;
+        font-size: 15px;
+        padding-top: 3px;
+    }
+
+    option:hover {
+        letter-spacing: 5px;
+    }
+
+    input {
+        top: 105px;
+        left: 5px;
+        background: #fff;
+        position: absolute;
+        width: 150px;
+        border: solid 3px #000;
+        height: 20px;
+        float: left;
+    }
+
+    /*styling buttons*/
+
+    button {
+        position: absolute;
+        left: 5px;
+        background-color: #fff;
+        border: solid 3px #000;
+        font-family: Helvetica;
+        font-weight: bolder;
+        font-size: 20px;
+        padding-top: 3px;
+    }
+
+    button:hover {
+        border: solid 3px #0f0;
+    }
+
+    blockquote {
+        font-style: italic;
+        font-size: 13px;
+    }
+
+    a {
+        color: #f00;
+        border-bottom: none;
+    }
+
+    a:hover {
+        letter-spacing: 3px;
+    }

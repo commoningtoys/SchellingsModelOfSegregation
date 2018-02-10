@@ -1,5 +1,5 @@
 // let agents = [];
-class SchellingsModel{
+class SchellingsModel {
 	/**
 	* @param {int} size - number of colums and rows of the grid
 	* @param {int} percentage - percentage of agents of one type or another
@@ -9,7 +9,7 @@ class SchellingsModel{
 	* @param {boolean} randomizedThreshold - if true the schelling's model starts with randomized thresholds
 	  that change according to how much the agent had to move.
 	*/
-	constructor(size, freeCells, agentKind, threshold1, threshold2, randomizedThreshold){
+	constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold) {
 		this.cols = this.rows = size + 1;
 		this.r = floor(gridSize / size + 1);
 		this.AK = agentKind;
@@ -20,31 +20,31 @@ class SchellingsModel{
 		this.unhappyCount = 0;
 		this.decreaseValue = 0.000000001;
 		//initialize the model by filling the 2D array with agents
-		for (let y = 1; y < this.rows - 1; y++){
-			for (let x = 1; x < this.cols - 1; x++){
-					if(floor(random(100)) > freeCells){
-						this.agents[x][y] = new Agent(floor(random(agentKind)), threshold1, threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
-						this.agentCount++;
-					}
+		for (let y = 1; y < this.rows - 1; y++) {
+			for (let x = 1; x < this.cols - 1; x++) {
+				if (floor(random(100)) > freeCells) {
+					this.agents[x][y] = new Agent(floor(random(agentKind)), randomizedThreshold == true ? floor(random(0, 6)) * 10 : threshold1, randomizedThreshold == true ? floor(random(6, 10)) * 10 : threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
+					this.agentCount++;
+				}
 			}
 		}
 	}
 
-	show(){		
-		for (let y = 1; y < this.rows - 1; y++){
-			for (let x = 1; x < this.cols - 1; x++){
-				if(this.agents[x][y] != null) this.agents[x][y].show(300 + x * this.r, y * this.r, this.r);
+	show() {
+		for (let y = 1; y < this.rows - 1; y++) {
+			for (let x = 1; x < this.cols - 1; x++) {
+				if (this.agents[x][y] != null) this.agents[x][y].show(350 + x * this.r, y * this.r, this.r);
 			}
 		}
 	}
 
-	moveAgents(){
-		let freeSpots = emptySpots(this.agents);		
+	moveAgents() {
+		let freeSpots = emptySpots(this.agents);
 		this.unhappyCount = 0;
-		for (let y = 1; y < this.rows - 1; y++){
-			for (let x = 1; x < this.cols - 1; x++){
-				if(this.agents[x][y] != null){
-					if(this.agents[x][y].sat < 1){
+		for (let y = 1; y < this.rows - 1; y++) {
+			for (let x = 1; x < this.cols - 1; x++) {
+				if (this.agents[x][y] != null) {
+					if (this.agents[x][y].sat < 1) {
 						moveAgent(this.agents, x, y, freeSpots);
 						this.unhappyCount++;
 					}
@@ -52,7 +52,7 @@ class SchellingsModel{
 			}
 		}
 
-		function moveAgent(agents, x, y, arr){
+		function moveAgent(agents, x, y, arr) {
 			let d = 0, minD = gridSize,
 				newX = 0, newY = 0;
 			// for(let i = 0; i < arr.length; i++){
@@ -77,11 +77,11 @@ class SchellingsModel{
 			// console.log(minD, newX, newY);
 		}
 		//checks for empty spots to move the agent
-		function emptySpots(arr2D){
+		function emptySpots(arr2D) {
 			let spots = [];
-			for (let row = 1; row < arr2D.length - 1; ++row){
-				for (let col = 1; col < arr2D[row].length - 1; ++col){
-					if(arr2D[row][col] == null)spots.push(createVector(row, col));
+			for (let row = 1; row < arr2D.length - 1; ++row) {
+				for (let col = 1; col < arr2D[row].length - 1; ++col) {
+					if (arr2D[row][col] == null) spots.push(createVector(row, col));
 				}
 			}
 			return spots;
@@ -89,48 +89,54 @@ class SchellingsModel{
 
 	}
 
-	checkNeighbour(){
+	checkNeighbour() {
 		let totalNeighbour = 0;
+		let totalSameType = 0;
 		let totalOtherType = 0;
-		for (let y = 1; y < this.rows - 1; y++){
-			for (let x = 1; x < this.cols - 1; x++){
-				if(this.agents[x][y] != null){//always ignore the null spot
+		for (let y = 1; y < this.rows - 1; y++) {
+			for (let x = 1; x < this.cols - 1; x++) {
+				if (this.agents[x][y] != null) {//always ignore the null spot
 					//////////////////////
-					for(let i = -1; i <= 1; i++){
-						for(let j = -1; j <= 1; j++){
-							if(this.agents[x + j][y + i] != null)totalNeighbour++;//here we check the number of neighbours
-							if(this.agents[x + j][y + i] != null && this.agents[x + j][y + i].type != this.agents[x][y].type)totalOtherType++;
+					for (let i = -1; i <= 1; i++) {
+						for (let j = -1; j <= 1; j++) {
+							if (this.agents[x + j][y + i] != null) totalNeighbour++;//here we check the number of neighbours
+							if (this.agents[x + j][y + i] != null && this.agents[x + j][y + i].type == this.agents[x][y].type) totalSameType++;
+							if (this.agents[x + j][y + i] != null && this.agents[x + j][y + i].type != this.agents[x][y].type) totalOtherType++;
 						}
 					}
 					//here we check if the amount of unwanted neighbours surpasses the threshold
-					if(totalNeighbour -1 > 0){
-						let percOtherType = ((totalOtherType - 1) / (totalNeighbour -1)) * 100;//we do minus 1 because the loop checks also the agent itself
+					if (totalNeighbour - 1 > 0) {
+						let percSameType = floor(((totalSameType - 1) / (totalNeighbour - 1)) * 100);//we do minus 1 because the loop checks also the agent itself
+						let percOtherType = floor(((totalOtherType - 1) / (totalNeighbour - 1)) * 100);
 						//here you add the range with &&
-						if(percOtherType <= this.agents[x][y].t1 || percOtherType >= this.agents[x][y].t2)this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
-							else this.agents[x][y].sat = 0;
+						// percOtherType <= this.agents[x][y].t1 &&
+						if (percOtherType >= this.agents[x][y].t1 && percSameType >= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
+						// else if( percOtherType <= this.agents[x][y].t1);
+						else this.agents[x][y].sat = 0;
 						// if(this.agents[x][y].tu != null && percSameType >= this.agents[x][y].tu)this.agents[x][y].sat = 0;
 						//it could also be possible to decrease the satisfaction to 0 instead of changing it directly
 					} else this.agents[x][y].sat = 1;// if there is no one around the agent is satisfied
 					//reset the counters
 					totalNeighbour = 0;
+					totalSameType = 0;
 					totalOtherType = 0;
-				//////////////////////////	end of this.agents[x][y] !=null if
+					//////////////////////////	end of this.agents[x][y] !=null if
 				}
 			}
 		}
 	}
 	// this function displays the total satisfaction of the population of the agents
-	displySatisfaction(){
+	displySatisfaction() {
 		let unhappiness = map(this.unhappyCount, 0, this.agentCount, 0, 100);//needs to be revised!!
 		this.unhappinessIndex.push(unhappiness);
-		if(this.unhappinessIndex.length > 100){
+		if (this.unhappinessIndex.length > 100) {
 			this.unhappinessIndex.splice(0, 1);
 		}
 		noFill();
 		stroke(0);
 		strokeWeight(5);
 		beginShape();
-		for(let i = 0; i < this.unhappinessIndex.length; i++)vertex(5 + i * 3, 500 - this.unhappinessIndex[i]);
+		for (let i = 0; i < this.unhappinessIndex.length; i++)vertex(5 + i * 3, 500 - this.unhappinessIndex[i]);
 		endShape();
 		document.getElementById("happinessValue").innerHTML = ":-( level\n" + parseInt(unhappiness) + " %";
 	}
@@ -143,14 +149,14 @@ class SchellingsModel{
 * @param {int} cols - number of columns
 * @param {int} initial - initial value
 */
-let matrix = function(rows, cols, initial){
-   let arr = [];
-   for (let i = 0; i < rows; ++i){
-      let columns = [];
-      for (let j = 0; j < cols; ++j){
-         columns[j] = initial;
-      }
-      arr[i] = columns;
-    }
-    return arr;
+let matrix = function (rows, cols, initial) {
+	let arr = [];
+	for (let i = 0; i < rows; ++i) {
+		let columns = [];
+		for (let j = 0; j < cols; ++j) {
+			columns[j] = initial;
+		}
+		arr[i] = columns;
+	}
+	return arr;
 }
