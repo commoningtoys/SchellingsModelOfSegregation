@@ -23,7 +23,7 @@ class SchellingsModel {
 		for (let y = 1; y < this.rows - 1; y++) {
 			for (let x = 1; x < this.cols - 1; x++) {
 				if (floor(random(100)) > freeCells) {
-					this.agents[x][y] = new Agent(floor(random(agentKind)), randomizedThreshold == true ? floor(random(0, 6)) * 10 : threshold1, randomizedThreshold == true ? floor(random(6, 10)) * 10 : threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
+					this.agents[x][y] = new Agent(floor(random(agentKind)), randomizedThreshold == true ? 0 : threshold1, randomizedThreshold == true ? floor(random(1, 100)) : threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
 					this.agentCount++;
 				}
 			}

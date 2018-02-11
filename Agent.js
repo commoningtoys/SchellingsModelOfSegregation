@@ -35,7 +35,7 @@ class Agent{
 		fill(0, this.alpha);
 		beginShape();
 		for(let i = 0; i < this.type + 3; i++){
-			let angle = map(i, 0, this.type + 3, 0 + HALF_PI, TWO_PI + HALF_PI);
+			let angle = map(i, 0, this.type + 3, 0 - HALF_PI, TWO_PI - HALF_PI);
 			let posX = x + cos(angle) * (r/2.2);
 			let posY = y + sin(angle) * (r/2.2);
 			vertex(posX, posY);
