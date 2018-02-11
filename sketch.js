@@ -39,11 +39,6 @@ function draw(){
 		t2.value = parseInt(t1.value) + 1;
 		document.getElementById("theThreshold").innerHTML = thresholdText();
 	}
-	// if(parseInt(t2.value) <= parseInt(t1.value)){
-	// 	console.log([parseInt(t2.value), parseInt(t1.value)])
-	// 	t1.value = parseInt(t2.value) + 1;
-	// 	document.getElementById("theThreshold").innerHTML = document.getElementById("threshold1").value + " % threshold: " + document.getElementById("threshold2").value + " %";
-	// }
 }
 
 function initModel(){
@@ -59,17 +54,46 @@ function updateValue(){
 	document.getElementById("theSize").innerHTML = "size: " + document.getElementById("size").value;
 	document.getElementById("theKind").innerHTML = "kind: " + document.getElementById("kind").value;
 	if(!randomizedThresholds)document.getElementById("theThreshold").innerHTML = thresholdText();
+	else document.getElementById("theThreshold").innerHTML = randomizedThresholds == true ? "RANDOMIZED! max " + document.getElementById("threshold2").value + "%" : thresholdText();
 	document.getElementById("theFreeCell").innerHTML = "free cells: " + document.getElementById("freeCell").value + "%";
 }
 
 function randomThreshold(){
 	randomizedThresholds = !randomizedThresholds;
 	document.getElementById("randomThreshold").innerHTML = randomizedThresholds == true ? "SET BACK TO DEFAULT" : "RANDOMIZE THE THERSHOLDS";
-	document.getElementById("theThreshold").innerHTML = randomizedThresholds == true ? "RANDOMIZED!" : thresholdText();
+	document.getElementById("theThreshold").innerHTML = randomizedThresholds == true ? "RANDOMIZED! max " + document.getElementById("threshold2").value + "%" : thresholdText();
 	initModel();
 }
 function thresholdText(){
 	return document.getElementById("threshold1").value + "% &lt threshold &lt" + document.getElementById("threshold2").value + "%";
+}
+/**
+ * this function intializes the model with different cases
+ * @param {int} val - the case to be called
+ */
+function initModelByCase(val){
+	let emptySpots = document.getElementById("freeCell").value;
+	// constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold)	
+	if(val == 1){
+		SM = new SchellingsModel(2, 30, 0, 10, emptySpots,false);
+		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 10%";
+	}
+	if(val == 2){
+		SM = new SchellingsModel(2, 30, 0, 30, emptySpots,false);
+		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 30%";
+	}
+	if(val == 3){
+		SM = new SchellingsModel(2, 30, 0, 50, emptySpots,false);
+		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 50%";
+	}
+	if(val == 4){
+		SM = new SchellingsModel(2, 30, 0, 70, emptySpots,false);
+		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 70%";
+	}
+	if(val == 5){
+		SM = new SchellingsModel(2, 30, 5, 25, 30,false);
+		document.getElementById("theThreshold").innerHTML = "5% &lt threshold &lt 25%";
+	}
 }
 /**
 AUDIO STUFF

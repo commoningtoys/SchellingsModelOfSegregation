@@ -14,8 +14,6 @@
 </head>
 
 <body bgcolor="#FFF">
-
-	<div id="slider-range"></div>
 	<div>
 		<input type="range" style="top: 5px" id="kind" value="2" min="2" max="6" step="1" onchange="updateValue()">
 		<input type="range" style="top: 55px" id="size" value="30" min="5" max="30" step="1" onchange="updateValue()">
@@ -30,6 +28,13 @@
 	<div class="inputValue" style="top: 105px" id="theThreshold">10% &lt threshold &gt 30%</div>
 	<div class="inputValue" style="top: 155px" id="theFreeCell">free cells: 30%</div>
 	<div class="happiness" style="top: 305px" id="happinessValue">:-(</div>
+	<div class="caseButtons">
+	<button onclick="initModelByCase(1)">CASE 1</button>
+	<button onclick="initModelByCase(2)">CASE 2</button>
+	<button onclick="initModelByCase(3)">CASE 3</button>
+	<button onclick="initModelByCase(4)">CASE 4</button>
+	<button onclick="initModelByCase(5)">CASE 5</button>				
+	</div>
 </body>
 
 </html>

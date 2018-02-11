@@ -23,7 +23,7 @@ class SchellingsModel {
 		for (let y = 1; y < this.rows - 1; y++) {
 			for (let x = 1; x < this.cols - 1; x++) {
 				if (floor(random(100)) > freeCells) {
-					this.agents[x][y] = new Agent(floor(random(agentKind)), randomizedThreshold == true ? 0 : threshold1, randomizedThreshold == true ? floor(random(1, 100)) : threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
+					this.agents[x][y] = new Agent(floor(random(agentKind)), randomizedThreshold == true ? 0 : threshold1, randomizedThreshold == true ? floor(random(1, threshold2)) : threshold2);// randomizedThreshold == true ? floor(random(2, 9)) * 10 : threshold
 					this.agentCount++;
 				}
 			}
@@ -61,7 +61,7 @@ class SchellingsModel {
 		 */
 		function moveAgent(agents, x, y, arr) {
 			let d = 0, minD = gridSize,
-				newX = 0, newY = 0;ß
+				newX = 0, newY = 0;
 			let index = floor(random(arr.length));//check for a random position
 			newX = arr[index].x;
 			newY = arr[index].y;
