@@ -65,7 +65,7 @@ function randomThreshold(){
 	initModel();
 }
 function thresholdText(){
-	return document.getElementById("threshold1").value + "% &lt threshold &lt" + document.getElementById("threshold2").value + "%";
+	return document.getElementById("threshold1").value + "% &lt threshold &gt " + document.getElementById("threshold2").value + "%";
 }
 /**
  * this function intializes the model with different cases

@@ -113,7 +113,7 @@ class SchellingsModel {
 							if (percSameType >= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
 							else this.agents[x][y].sat = 0;
 						} else {
-							if (percOtherType >= this.agents[x][y].t1 && percSameType >= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
+							if (percSameType >= this.agents[x][y].t1 && percSameType <= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
 							else this.agents[x][y].sat = 0;
 						}
 					} else this.agents[x][y].sat = 1;// if there is no one around the agent is satisfied
