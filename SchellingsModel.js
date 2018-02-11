@@ -51,19 +51,17 @@ class SchellingsModel {
 				}
 			}
 		}
-
+		/**
+		 * function that updates the position of the agents in the
+		 * neighbourhood
+		 * @param {Agent array} agents - the array of agents
+		 * @param {int} x - position of the agent on x axis
+		 * @param {int} y - position of the agent on y axis
+		 * @param {Array} arr - freeSpots array 
+		 */
 		function moveAgent(agents, x, y, arr) {
 			let d = 0, minD = gridSize,
-				newX = 0, newY = 0;
-			// for(let i = 0; i < arr.length; i++){
-			// 	d = dist(x, y, arr[i].x, arr[i].y);
-			// 	if(d < minD){//check the closest free spot in the grid
-			// 		minD = d;
-			// 		//assign the empty spot coordinates to temporary variables
-			// 		newX = arr[i].x;
-			// 		newY = arr[i].y;
-			// 	}
-			// }
+				newX = 0, newY = 0;ß
 			let index = floor(random(arr.length));//check for a random position
 			newX = arr[index].x;
 			newY = arr[index].y;
@@ -74,9 +72,12 @@ class SchellingsModel {
 			d = dist(x, y, newX, newY);
 			// playSound(d, floor(gridSize / size + 1));//improve this using this.r or similar
 			freeSpots = emptySpots(agents);//update the empty position array
-			// console.log(minD, newX, newY);
 		}
-		//checks for empty spots to move the agent
+		/**
+		 * function that returns an array of empty spots where the agents can move to
+		 * @param {2D Array} arr2D - a 2D array that stores the agents
+		 * @returns {2D Array} spots - a 2D array with the empty spots
+		 */
 		function emptySpots(arr2D) {
 			let spots = [];
 			for (let row = 1; row < arr2D.length - 1; ++row) {
@@ -105,16 +106,16 @@ class SchellingsModel {
 						}
 					}
 					//here we check if the amount of unwanted neighbours surpasses the threshold
-					if (totalNeighbour - 1 > 0) {
+					if (totalNeighbour - 1 > 0) {//here we check if there is any neighbour around the agent
 						let percSameType = floor(((totalSameType - 1) / (totalNeighbour - 1)) * 100);//we do minus 1 because the loop checks also the agent itself
 						let percOtherType = floor(((totalOtherType - 1) / (totalNeighbour - 1)) * 100);
-						//here you add the range with &&
-						// percOtherType <= this.agents[x][y].t1 &&
-						if (percOtherType >= this.agents[x][y].t1 && percSameType >= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
-						// else if( percOtherType <= this.agents[x][y].t1);
-						else this.agents[x][y].sat = 0;
-						// if(this.agents[x][y].tu != null && percSameType >= this.agents[x][y].tu)this.agents[x][y].sat = 0;
-						//it could also be possible to decrease the satisfaction to 0 instead of changing it directly
+						if (this.agents[x][y].t1 < 1) {//if the lower threshold is less than 1 we consider only the upper threshold
+							if (percSameType >= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
+							else this.agents[x][y].sat = 0;
+						} else {
+							if (percOtherType >= this.agents[x][y].t1 && percSameType >= this.agents[x][y].t2) this.agents[x][y].sat = 1;//reduce the agent satisfaction accoding to the percentage of same neighbours
+							else this.agents[x][y].sat = 0;
+						}
 					} else this.agents[x][y].sat = 1;// if there is no one around the agent is satisfied
 					//reset the counters
 					totalNeighbour = 0;
