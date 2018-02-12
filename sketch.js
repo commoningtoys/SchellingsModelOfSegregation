@@ -22,7 +22,8 @@ function setup(){
 	// initModel();
 	// volume0();
 	// constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold)
-	SM = new SchellingsModel(2, 30, 10, 30, 30, false);
+	// SM = new SchellingsModel(2, 30, 10, 30, 30, false);
+	initModelByCase(1);
 }
 
 function draw(){	
