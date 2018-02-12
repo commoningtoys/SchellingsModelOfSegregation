@@ -75,24 +75,16 @@ function initModelByCase(val){
 	let emptySpots = document.getElementById("freeCell").value;
 	// constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold)	
 	if(val == 1){
-		SM = new SchellingsModel(2, 30, 0, 10, emptySpots,false);
+		SM = new SchellingsModel(2, 30, 0, 10, emptySpots, false);
 		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 10%";
+		document.getElementById("threshold1").value = 0;
 	}
 	if(val == 2){
-		SM = new SchellingsModel(2, 30, 0, 30, emptySpots,false);
-		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 30%";
+		SM = new SchellingsModel(2, 30, 15, 45, 30, false);
+		document.getElementById("theThreshold").innerHTML = "15% &lt threshold &lt 45%";
 	}
 	if(val == 3){
-		SM = new SchellingsModel(2, 30, 0, 50, emptySpots,false);
-		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 50%";
-	}
-	if(val == 4){
-		SM = new SchellingsModel(2, 30, 0, 70, emptySpots,false);
-		document.getElementById("theThreshold").innerHTML = "0% &lt threshold &lt 70%";
-	}
-	if(val == 5){
-		SM = new SchellingsModel(2, 30, 5, 25, 30,false);
-		document.getElementById("theThreshold").innerHTML = "5% &lt threshold &lt 25%";
+		randomThreshold()
 	}
 }
 /**
