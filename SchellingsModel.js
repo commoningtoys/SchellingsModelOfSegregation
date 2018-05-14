@@ -4,7 +4,7 @@ class SchellingsModel {
 	* @param {int} size - number of colums and rows of the grid
 	* @param {int} percentage - percentage of agents of one type or another
 	* @param {int} freeCells - percentage of free cells in the grid // deprecated
-	* @param {int} agentKind - how many different kind of agnts are present on the 
+	* @param {int} agentKind - how many different kind of agents are present on the 
 	* @param {int} threshold - maximum amount of "fremd" neighbour the agent can have
 	* @param {boolean} randomizedThreshold - if true the schelling's model starts with randomized thresholds
 	  that change according to how much the agent had to move.
