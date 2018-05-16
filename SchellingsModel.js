@@ -11,7 +11,7 @@ class SchellingsModel {
 	*/
 	constructor(agentKind, size, threshold1, threshold2, freeCells, randomizedThreshold) {
 		this.cols = this.rows = size + 1;
-		this.r = floor(gridSize / size + 1);
+		this.r = floor((innerHeight * 0.95) / size + 1);
 		this.AK = agentKind;
 		this.agents = [];
 		this.agents = matrix(this.rows, this.cols, null);
@@ -19,6 +19,7 @@ class SchellingsModel {
 		this.unhappinessIndex = [];
 		this.unhappyCount = 0;
 		this.decreaseValue = 0.000000001;
+		this.unhappiness = 0;
 		//initialize the model by filling the 2D array with agents
 		for (let y = 1; y < this.rows - 1; y++) {
 			for (let x = 1; x < this.cols - 1; x++) {
@@ -33,7 +34,7 @@ class SchellingsModel {
 	show() {
 		for (let y = 1; y < this.rows - 1; y++) {
 			for (let x = 1; x < this.cols - 1; x++) {
-				if (this.agents[x][y] != null) this.agents[x][y].show(350 + x * this.r, y * this.r, this.r);
+				if (this.agents[x][y] != null) this.agents[x][y].show(x * this.r, y * this.r, this.r);
 			}
 		}
 	}
@@ -88,6 +89,11 @@ class SchellingsModel {
 			return spots;
 		}
 
+		this.unhappiness = map(this.unhappyCount, 0, this.agentCount, 0, 100);//needs to be revised!!
+		this.unhappinessIndex.push(this.unhappiness);
+		if (this.unhappinessIndex.length > this.cols * this.r) {
+			this.unhappinessIndex.splice(0, 1);
+		}
 	}
 
 	checkNeighbour() {
@@ -128,18 +134,14 @@ class SchellingsModel {
 	}
 	// this function displays the total satisfaction of the population of the agents
 	displySatisfaction() {
-		let unhappiness = map(this.unhappyCount, 0, this.agentCount, 0, 100);//needs to be revised!!
-		this.unhappinessIndex.push(unhappiness);
-		if (this.unhappinessIndex.length > 100) {
-			this.unhappinessIndex.splice(0, 1);
-		}
+
 		noFill();
-		stroke(0);
-		strokeWeight(5);
+		stroke(255, 0, 0);
+		strokeWeight(2);
 		beginShape();
-		for (let i = 0; i < this.unhappinessIndex.length; i++)vertex(5 + i * 3, 500 - this.unhappinessIndex[i]);
+		for (let i = 0; i < this.unhappinessIndex.length; i++)vertex(i, height - this.unhappinessIndex[i] * 3);
 		endShape();
-		document.getElementById("happinessValue").innerHTML = ":-( level\n" + parseInt(unhappiness) + " %";
+		document.getElementById("happinessValue").innerHTML = ":-( level\n" + parseInt(this.unhappiness) + " %";
 	}
 }
 
